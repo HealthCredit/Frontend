@@ -43,6 +43,8 @@ const Nav = () => {
         console.log(account);
         console.log("Logging in..");
         const provider = new ethers.providers.Web3Provider(ethereum);
+        const Id = provider.getNetwork();
+        console.log(Id);
         // const provider = new ethers.providers.getDefaultProvider(ethereum);
         // const { chainId } = provider.
         // console.log(chainId);
@@ -80,7 +82,7 @@ const Nav = () => {
             <Link href="/Proposal">Issue project</Link>
           </li>
           <li className={styles.navBtn}>
-            <Link href="/Approove">Approve project</Link>
+            <Link href="/Approve">Approve project</Link>
           </li>
         </ul>
         <div className={styles.loginBtn}>

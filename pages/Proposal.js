@@ -16,7 +16,24 @@ function Proposal() {
     const value = name === "LYSamount" ? +e.target.value : e.target.value;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
-
+  const formIsValid = () => {
+    if (
+      userRegistration.orgName.length !== 0 &&
+      userRegistration.countryName.length !== 0 &&
+      userRegistration.orgName.description !== 0 &&
+      userRegistration.LYSamount > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const submitForm = () => {
+    if (!formIsValid) {
+      return;
+    }
+    //Here you write your upload logic or whatever you want
+  };
   return (
     <>
       <Nav />
@@ -25,7 +42,7 @@ function Proposal() {
           <h1>Submit proposal for approval</h1>
         </div>
         {!formIsSubmitted && (
-          <form action="" className={styles.form}>
+          <form action="" className={styles.form} onSubmit={submitForm}>
             <div className={styles.formBox}>
               <div className={styles.box}>
                 <input
@@ -76,7 +93,7 @@ function Proposal() {
                 <input type="file" name="file" />
               </div>
               <div className={styles.submitBtn}>
-              <button>Submit</button>
+                <button type="submit">Submit</button>
               </div>
             </div>
           </form>
