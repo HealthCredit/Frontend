@@ -1,15 +1,15 @@
 .container {
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: columns; */
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
+}
+.container div {
+  margin: 0 1rem;
 }
 .container button {
-  margin: 1rem;
   padding: 5px 10px;
   background-color: red;
-}
-.container span {
-  font-weight: 550;
+  margin: 10px;
 }

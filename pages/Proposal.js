@@ -55,6 +55,15 @@ function Proposal() {
       return;
     }
     //Here you write your upload logic or whatever you want
+
+    //at the end we rest the values of input and set setFormIsSubmitted(true) to display "Your proposal is submitted"
+
+    setUserRegistration({
+      orgName: "",
+      countryName: "",
+      description: "",
+      LYSamount: 0,
+    });
   };
   return (
     <>
