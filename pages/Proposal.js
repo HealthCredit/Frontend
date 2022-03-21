@@ -1,6 +1,7 @@
 import styles from "../styles/Proposal.module.css";
 import Nav from "./components/Nav";
 import { useState } from "react";
+import abi from "../pages/abi/LYSabi.json";
 
 function Proposal() {
   const [userRegistration, setUserRegistration] = useState({
@@ -10,7 +11,6 @@ function Proposal() {
     LYSamount: 0,
   });
   const [formIsSubmitted, setFormIsSubmitted] = useState(false); //if form is submitted we display "you proposal is submitted"
-
   const handleInput = (e) => {
     const name = e.target.name;
     const value = name === "LYSamount" ? +e.target.value : e.target.value;
@@ -28,7 +28,29 @@ function Proposal() {
       return false;
     }
   };
-  const submitForm = () => {
+
+  const getContract = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const accounts = await provider.listAccounts();
+    let currentUserAddress = accounts[0];
+    console.log(currentUserAddress);
+    currentUserAddress = currentUserAddress.toLowerCase();
+    console.log(currentUserAddress);
+    const contractAddress = "0xFcD3C90F4B8F4E07454f4E67579809b718EbeDF7";
+    const contractAbi = abi.abi;
+
+    const signer = provider.getSigner();
+    const contract = await new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      signer
+    );
+    return contract;
+  };
+  const submitForm = (e) => {
+    e.preventDefault();
+
+
     if (!formIsValid) {
       return;
     }

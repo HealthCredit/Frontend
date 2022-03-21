@@ -2,7 +2,7 @@ import React from "react";
 import Proposal from "../Proposal";
 import styles from "./Grid.module.css";
 
-function Grid({ obj }) {
+function Grid({ obj ,hasImpact}) {
   return (
     <div className={styles.container}>
       <div>
@@ -11,9 +11,12 @@ function Grid({ obj }) {
       <div>
         <p>{obj.link}</p>
       </div>
-      <div>
+      {hasImpact && 
+        <div>
         <p>{obj.status}</p>
       </div>
+      }
+     
     </div>
   );
 }

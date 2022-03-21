@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const Nav = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState("");
   const isWalletConnect = async () => {
     try {
       const { ethereum } = window;
@@ -15,10 +16,22 @@ const Nav = () => {
         console.log("We have the ethereum object", ethereum);
       }
       const accounts = await ethereum.request({ method: "eth_accounts" });
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const Id = await provider.getNetwork();
+      if (Id.chainId !== 80001) {
+        console.log("connect to mumbai testnet");
+        alert("Connect to mumbai network");
+        throw new error("Connect to mumbai network");
+      }
+
       if (accounts.length !== 0) {
         const account = accounts[0];
         console.log(account);
-        setIsConnected(account);
+
+        if (Id.chainId === 80001) {
+          setCurrentAccount(account);
+          setIsConnected(true);
+        }
       } else {
         console.log("No account found");
       }
@@ -39,14 +52,22 @@ const Nav = () => {
       if (accounts.length !== 0) {
         const account = accounts[0];
         console.log(account);
-        const provider = new ethers.providers.Web3Provider();
-        const { chainId } = provider.getNetwork();
-        if (chainId !== 137) {
+        console.log("Logging in..");
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const Id = await provider.getNetwork();
+        console.log(Id.chainId);
+        // const provider = new ethers.providers.getDefaultProvider(ethereum);
+        // const { chainId } = provider.
+        // console.log(chainId);
+        if (Id.chainId !== 80001) {
+          console.log("connect to mumbai testnet");
           alert("Connect to mumbai network");
           throw new error("Connect to mumbai network");
-          return;
         }
-        setIsConnected(true);
+        if (Id.chainId === 80001) {
+          setCurrentAccount(account);
+          setIsConnected(true);
+        }
       } else {
         console.log("No account found");
       }
@@ -64,22 +85,37 @@ const Nav = () => {
           <li className={styles.navBtn}>
             <Link href="/">Home</Link>
           </li>
-          <li className={styles.navBtn}>
-            <Link href="/Impact">Buy Impact</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/LYS">Buy LYS</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/Proposal">Issue project</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/Approove">Approve project</Link>
-          </li>
+          {isConnected && (
+            <>
+              <li className={styles.navBtn}>
+                <Link href="/Impact">Buy Impact</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/LYS">Buy LYS</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/Proposal">Issue project</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/Approve">Approve project</Link>
+              </li>
+            </>
+          )}
         </ul>
         <div className={styles.loginBtn}>
           {!isConnected && (
             <button onClick={connectWallet}>Wallet login</button>
+          )}
+          {isConnected && (
+            <div>
+              <p className={styles.logIn}>
+                Logged in(
+                <span>
+                  {currentAccount.slice(0, 4)}....{currentAccount.slice(-4)}
+                </span>
+                )
+              </p>
+            </div>
           )}
         </div>
       </nav>

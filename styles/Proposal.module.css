@@ -76,3 +76,6 @@
   justify-content: center;
   align-items: center;
 }
+.invalidBtn {
+  cursor: not-allowed;
+}
