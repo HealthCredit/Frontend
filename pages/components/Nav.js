@@ -16,11 +16,22 @@ const Nav = () => {
         console.log("We have the ethereum object", ethereum);
       }
       const accounts = await ethereum.request({ method: "eth_accounts" });
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const Id = await provider.getNetwork();
+      if (Id.chainId !== 80001) {
+        console.log("connect to mumbai testnet");
+        alert("Connect to mumbai network");
+        throw new error("Connect to mumbai network");
+      }
+
       if (accounts.length !== 0) {
         const account = accounts[0];
         console.log(account);
-        setIsConnected(account);
-        setCurrentAccount(account);
+
+        if (Id.chainId === 80001) {
+          setCurrentAccount(account);
+          setIsConnected(true);
+        }
       } else {
         console.log("No account found");
       }
@@ -43,18 +54,20 @@ const Nav = () => {
         console.log(account);
         console.log("Logging in..");
         const provider = new ethers.providers.Web3Provider(ethereum);
-        const Id = provider.getNetwork();
-        console.log(Id);
+        const Id = await provider.getNetwork();
+        console.log(Id.chainId);
         // const provider = new ethers.providers.getDefaultProvider(ethereum);
         // const { chainId } = provider.
         // console.log(chainId);
-        // if (chainId !== 137) {
-        //   console.log("Mumbai testnet connected");
-        //   alert("Connect to mumbai network");
-        //   throw new error("Connect to mumbai network");
-        // }
-        setCurrentAccount(account);
-        setIsConnected(true);
+        if (Id.chainId !== 80001) {
+          console.log("connect to mumbai testnet");
+          alert("Connect to mumbai network");
+          throw new error("Connect to mumbai network");
+        }
+        if (Id.chainId === 80001) {
+          setCurrentAccount(account);
+          setIsConnected(true);
+        }
       } else {
         console.log("No account found");
       }
@@ -72,18 +85,22 @@ const Nav = () => {
           <li className={styles.navBtn}>
             <Link href="/">Home</Link>
           </li>
-          <li className={styles.navBtn}>
-            <Link href="/Impact">Buy Impact</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/LYS">Buy LYS</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/Proposal">Issue project</Link>
-          </li>
-          <li className={styles.navBtn}>
-            <Link href="/Approve">Approve project</Link>
-          </li>
+          {isConnected && (
+            <>
+              <li className={styles.navBtn}>
+                <Link href="/Impact">Buy Impact</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/LYS">Buy LYS</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/Proposal">Issue project</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/Approve">Approve project</Link>
+              </li>
+            </>
+          )}
         </ul>
         <div className={styles.loginBtn}>
           {!isConnected && (

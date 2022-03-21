@@ -52,7 +52,8 @@
   background-color: rgb(221, 72, 221);
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 1rem;
+  /* font-size: 1rem; */
+  margin: 0;
 }
 .logIn span {
   font-size: 0.6rem;
