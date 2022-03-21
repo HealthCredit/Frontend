@@ -28,6 +28,7 @@ function Proposal() {
       return false;
     }
   };
+
   const getContract = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
@@ -48,6 +49,8 @@ function Proposal() {
   };
   const submitForm = (e) => {
     e.preventDefault();
+
+
     if (!formIsValid) {
       return;
     }
