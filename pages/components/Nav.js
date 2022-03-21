@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const Nav = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState("");
   const isWalletConnect = async () => {
     try {
       const { ethereum } = window;
@@ -19,6 +20,7 @@ const Nav = () => {
         const account = accounts[0];
         console.log(account);
         setIsConnected(account);
+        setCurrentAccount(account);
       } else {
         console.log("No account found");
       }
@@ -39,13 +41,17 @@ const Nav = () => {
       if (accounts.length !== 0) {
         const account = accounts[0];
         console.log(account);
-        const provider = new ethers.providers.Web3Provider();
-        const { chainId } = provider.getNetwork();
-        if (chainId !== 137) {
-          alert("Connect to mumbai network");
-          throw new error("Connect to mumbai network");
-          return;
-        }
+        console.log("Logging in..");
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        // const provider = new ethers.providers.getDefaultProvider(ethereum);
+        // const { chainId } = provider.
+        // console.log(chainId);
+        // if (chainId !== 137) {
+        //   console.log("Mumbai testnet connected");
+        //   alert("Connect to mumbai network");
+        //   throw new error("Connect to mumbai network");
+        // }
+        setCurrentAccount(account);
         setIsConnected(true);
       } else {
         console.log("No account found");
@@ -80,6 +86,17 @@ const Nav = () => {
         <div className={styles.loginBtn}>
           {!isConnected && (
             <button onClick={connectWallet}>Wallet login</button>
+          )}
+          {isConnected && (
+            <div>
+              <p className={styles.logIn}>
+                Logged in(
+                <span>
+                  {currentAccount.slice(0, 4)}....{currentAccount.slice(-4)}
+                </span>
+                )
+              </p>
+            </div>
           )}
         </div>
       </nav>

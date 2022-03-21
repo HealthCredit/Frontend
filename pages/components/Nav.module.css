@@ -9,6 +9,12 @@
   justify-content: center;
   align-items: center;
 }
+
+/* .loginBtn p {
+  font-size: 10px;
+  display: block;
+  margin: 10px;
+} */
 .loginBtn button {
   background-color: violet;
   color: white;
@@ -41,4 +47,13 @@
 .navbar li:hover {
   background-color: rgb(238, 73, 73);
   /* color: rgb(199, 199, 134); */
+}
+.logIn {
+  background-color: rgb(221, 72, 221);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+.logIn span {
+  font-size: 0.6rem;
 }
