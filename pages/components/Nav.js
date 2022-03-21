@@ -2,6 +2,7 @@ import styles from "./Nav.module.css";
 import Link from "next/link";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
+// import { ConnectWallet } from "./ConnectWallet";
 
 const Nav = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -88,13 +89,16 @@ const Nav = () => {
           {isConnected && (
             <>
               <li className={styles.navBtn}>
-                <Link href="/Impact">Buy Impact</Link>
+                <Link href="/Impact">Get Impact</Link>
               </li>
               <li className={styles.navBtn}>
-                <Link href="/LYS">Buy LYS</Link>
+                <Link href="/BuyLYS">Buy LYS</Link>
               </li>
               <li className={styles.navBtn}>
-                <Link href="/Proposal">Issue project</Link>
+                <Link href="/IssueLYS">Issue LYS</Link>
+              </li>
+              <li className={styles.navBtn}>
+                <Link href="/Proposal">Propose project</Link>
               </li>
               <li className={styles.navBtn}>
                 <Link href="/Approve">Approve project</Link>
