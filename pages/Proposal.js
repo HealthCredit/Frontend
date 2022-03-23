@@ -2,6 +2,7 @@ import styles from "../styles/Proposal.module.css";
 import Nav from "./components/Nav";
 import { useState } from "react";
 import abi from "../pages/abi/LYSabi.json";
+import { ethers } from "ethers";
 
 function Proposal() {
   const [userRegistration, setUserRegistration] = useState({
@@ -44,8 +45,10 @@ function Proposal() {
       contractAbi,
       signer
     );
+    console.log(contract);
     return contract;
   };
+  
   const submitForm = (e) => {
     e.preventDefault();
     if (!formIsValid) {
