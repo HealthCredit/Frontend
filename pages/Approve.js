@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "./components/Grid";
 import styles from "../styles/Approove.module.css";
 import Nav from "./components/Nav";
@@ -71,7 +71,10 @@ function Approve() {
       console.log("User not have impacts");
     }
   };
-  verifyImpact();
+  useEffect(() => {
+    verifyImpact();
+  }, []);
+
   return (
     <>
       <Nav />
