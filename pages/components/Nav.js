@@ -94,12 +94,15 @@ const Nav = () => {
               <li className={styles.navBtn}>
                 <Link href="/Approve">Approve project</Link>
               </li>
+              <li className={styles.navBtn}>
+                <Link href="/MintLYS">Mint LYS</Link>
+              </li>
 
               <li className={styles.navBtn}>
-                <Link href="/Impact">Get Impact</Link>
+                <Link href="/BuyLYS">Buy LYS</Link>
               </li>
               <li className={styles.navBtn}>
-                <Link href="/BuyLYS">Buy LYS</Link>
+                <Link href="/Impact">Get Impact</Link>
               </li>
             </>
           )}
