@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Nav from "./components/Nav";
+import Nav from "../components/Nav";
 import styles from "../styles/BuyLYS.module.css";
 import { ethers } from "ethers";
-import abi from "../pages/abi/LYSabi.json";
+import abi from "./abi/LYS.json";
 
-function BuyLYS() {
+const BuyLYS = () => {
   const [id, setId] = useState(0);
   const [LYSexist, setLYSexist] = useState(0);
 
@@ -15,7 +15,7 @@ function BuyLYS() {
     // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
     // console.log(currentUserAddress);
-    const contractAddress = "0xb35BaF35DfD02Ad4fac9430981cEE413698cC242";
+    const contractAddress = "0x8c8d06991646A9701266794a385Db4b576E2678D";
     const contractAbi = abi.abi;
 
     const signer = provider.getSigner();
@@ -29,19 +29,19 @@ function BuyLYS() {
   };
   const checkLYSexist = async () => {
     const contract = await getContract();
-    console.log(contract);
+    // console.log(contract);
     const uri = await contract.uri(id);
     if (uri.length === 0) {
-      console.log("LYS of this token id does not exist");
+      // console.log("LYS of this token id does not exist");
       setLYSexist(1);
     } else {
-      console.log("LYS of this token id exist");
+      // console.log("LYS of this token id exist");
       setLYSexist(2);
     }
   };
 
   return (
-    <>
+    <div>
       <Nav />
       <div className={styles.container}>
         <h3>Enter Id of LYS token you want to buy</h3>
@@ -56,20 +56,20 @@ function BuyLYS() {
         </div>
         {LYSexist === 2 && (
           <>
+            <h4>LYS of this Id is available</h4>
             <button>
               <a
-                href={`https://testnets.opensea.io/assets/0xb35BaF35DfD02Ad4fac9430981cEE413698cC242/${id}`}
+                href={`https://testnets.opensea.io/assets/0x8c8d06991646A9701266794a385Db4b576E2678D/${id}`}
               >
                 Buy
               </a>
             </button>
-            <h4>LYS of this Id is available</h4>
           </>
         )}
         {LYSexist === 1 && <h4>LYS of this Id does not exist</h4>}
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default BuyLYS;

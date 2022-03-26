@@ -1,47 +1,38 @@
-import React, { useState, useEffect } from "react";
-import Grid from "./components/Grid";
+import React, { useState, useContext, useEffect } from "react";
+import Grid from "../components/Grid";
 import styles from "../styles/Approove.module.css";
-import Nav from "./components/Nav";
+import Nav from "../components/Nav";
 import abi from "./abi/IMPACTabi.json";
 import { ethers } from "ethers";
+import { useAppContext } from "../components/AppContext";
+import axios from "axios";
 
 function Approve() {
-  const [userHasImpact, setUerHasImpact] = useState(false);
+  const value = useContext(useAppContext);
+  const { userHasImpact, projects, accessToken } = value.state;
 
-  let arr = [
-    {
-      id: 1,
-      link: "http://google.com",
-      status: "pending",
-    },
-    {
-      id: 2,
-      link: "http://google.com",
-      status: "pending",
-    },
-    {
-      id: 2,
-      link: "http://google.com",
-      status: "pending",
-    },
-    {
-      id: 3,
-      link: "http://google.com",
-      status: "pending",
-    },
-    {
-      id: 4,
-      link: "http://google.com",
-      status: "pending",
-    },
-  ];
+  let ay = [];
+
+  projects.map((project) => {
+    for (const i in project) {
+      ay.push({
+        id: i,
+        link: project[i].slice(0, -2),
+        status: project[i].slice(-2)[0],
+        projectId: project[i].slice(-1)[0],
+      });
+    }
+  });
+
+  // value.setProjectList(ay);
+  // console.log(ay);
   const renderProposalForImpactHolder = () => {
-    return arr.map((element, index) => {
+    return ay.map((element, index) => {
       return <Grid key={index} obj={element} hasImpact={true} />;
     });
   };
   const renderProposalForNonImpactHolder = () => {
-    return arr.map((element, index) => {
+    return ay.map((element, index) => {
       return <Grid key={index} obj={element} hasImpact={false} />;
     });
   };
@@ -50,10 +41,10 @@ function Approve() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     let currentUserAddress = accounts[0];
-    console.log(currentUserAddress);
+    // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
-    console.log(currentUserAddress);
-    const contractAddress = "0x028E2a8C28AC1f5C6af8A8c5B32B08760a806f12";
+    // console.log(currentUserAddress);
+    const contractAddress = "0x27717A752D65F1f05fcad8e64794b0bc5C8Bf96d";
     const contractAbi = abi.abi;
 
     const signer = provider.getSigner();
@@ -64,14 +55,29 @@ function Approve() {
     );
     let tx = await contract.balanceOf(currentUserAddress);
     if (tx > 0) {
-      setUerHasImpact(true);
-      console.log("User has impact");
+      value.setUerHasImpact(true);
+      // console.log("User has impact");
     } else {
-      setUerHasImpact(false);
-      console.log("User not have impacts");
+      value.setUerHasImpact(false);
+      // console.log("User not have impacts");
     }
   };
+
   useEffect(() => {
+    async function fetchApi() {
+      await axios
+        .get("https://healthcreditb.herokuapp.com/api/data/fetchProjects", {
+          headers: accessToken,
+        })
+        .then((response) => {
+          value.setProjects(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    fetchApi();
     verifyImpact();
   }, []);
 

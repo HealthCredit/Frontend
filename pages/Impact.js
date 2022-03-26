@@ -1,6 +1,6 @@
 import styles from "../styles/Impact.module.css";
 import React, { useState } from "react";
-import Nav from "./components/Nav";
+import Nav from "../components/Nav";
 import { ethers } from "ethers";
 import abi from "../pages/abi/IMPACTabi.json";
 
@@ -12,11 +12,8 @@ function Impact() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     let currentUserAddress = accounts[0];
-
-    // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
     setCurrentUser(currentUserAddress);
-    // console.log(currentUserAddress);
     const contractAddress = "0x27717A752D65F1f05fcad8e64794b0bc5C8Bf96d";
     const contractAbi = abi.abi;
 
@@ -34,10 +31,11 @@ function Impact() {
     const contract = await getContract();
     if (amount > 0 && amount <= 1000) {
       let tx = await contract.getImpact(amount);
+      tx.wait();
     } else {
       console.log("Cannot but more than 1000 impact tokrns");
     }
-    console.log(currentUser);
+    // console.log(currentUser);
   };
   return (
     <>

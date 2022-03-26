@@ -1,34 +1,86 @@
-import React, { useState } from "react";
-import Nav from "./components/Nav";
+import React, { useState, useContext } from "react";
+import Nav from "../components/Nav";
 import styles from "../styles/MintLYS.module.css";
 import { ethers } from "ethers";
-import abi from "../pages/abi/LYSabi.json";
+import Web3Modal from "web3modal";
+import abi from "../pages/abi/LYS.json";
+import { useAppContext } from "../components/AppContext";
+import axios from "axios";
 
 function MintLYS() {
+  const value = useContext(useAppContext);
+  const { accessToken, currentAccount } = value.state;
   const [id, setId] = useState(0);
   const [uri, setUri] = useState("");
+  const [amount, setAmount] = useState(0);
 
-  const getContract = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  async function getContract() {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
     const accounts = await provider.listAccounts();
     let currentUserAddress = accounts[0];
-    // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
-    // console.log(currentUserAddress);
-    const contractAddress = "0xb35BaF35DfD02Ad4fac9430981cEE413698cC242";
+    const contractAddress = "0x8c8d06991646A9701266794a385Db4b576E2678D";
     const contractAbi = abi.abi;
 
-    const signer = provider.getSigner();
-    const contract = await new ethers.Contract(
-      contractAddress,
-      contractAbi,
-      signer
-    );
-  };
-  const mint = async () => {
+    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+    return contract;
+  }
+
+  async function mint() {
     const contract = await getContract();
-    //get the uri for metadata from backend and call the mint func of contract with the id entered
-  };
+
+    let minting = await contract.mint(id, amount);
+    minting.wait();
+  }
+
+  async function setUriAndRedirect() {
+    const contract = await getContract();
+
+    let lysId = await contract.getLYSTokenId(currentAccount);
+
+    // console.log(lysId);
+
+    let Uri = await contract.setURI(Number(lysId._hex), uri);
+    Uri.wait();
+
+    // console.log(JSON.parse(JSON.stringify({ uri, Uri })));
+
+    // console.log(Number(lysId._hex));
+  }
+
+  async function retrieveProjectDetails() {
+    const walletAddress = currentAccount;
+    const json = { walletAddress };
+    axios
+      .post(
+        "https://healthcreditb.herokuapp.com/api/data/retrieveDetails",
+        json,
+        {
+          headers: accessToken,
+        }
+      )
+      .then((response) => {
+        setUri(response.data.metadata_uri);
+        // console.log(response.data.metadata_uri);
+        setAmount(response.data.lysamount);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function InitiateMint() {
+    // fetch metadata_uri and projectId
+    await retrieveProjectDetails();
+
+    // initiate mint
+    await mint();
+  }
   return (
     <>
       <Nav />
@@ -38,10 +90,11 @@ function MintLYS() {
           <input
             type="number"
             onChange={(e) => {
-              setId(e.target.value);
+              setId(parseInt(e.target.value));
             }}
           />
-          <button onClick={mint}>Mint</button>
+          <button onClick={InitiateMint}>Mint</button>
+          <button onClick={setUriAndRedirect}>Set Metadata</button>
           <p>Make sure you are the owner of this proposal Id.</p>
         </div>
       </div>
