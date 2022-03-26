@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import Grid from "../components/Grid";
 import styles from "../styles/Approove.module.css";
 import Nav from "../components/Nav";
-import abi from "./abi/IMPACTabi.json";
+import abi from "../pages/abi/IMPACTabi.json";
 import { ethers } from "ethers";
 import { useAppContext } from "../components/AppContext";
 import axios from "axios";

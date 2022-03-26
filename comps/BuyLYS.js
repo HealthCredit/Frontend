@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Nav from "../components/Nav";
 import styles from "../styles/BuyLYS.module.css";
 import { ethers } from "ethers";
-import abi from "./abi/LYS.json";
+import abi from "../pages/abi/LYS.json";
 
 const BuyLYS = () => {
   const [id, setId] = useState(0);
