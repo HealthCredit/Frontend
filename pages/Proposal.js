@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { useState, useContext } from "react";
-import abi from "../pages/abi/LYS.json";
+import abi from "./abi/LYS.json";
 import { Web3Storage } from "web3.storage";
 import { useAppContext } from "../components/AppContext";
 import axios from "axios";

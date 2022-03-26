@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import styles from "../styles/MintLYS.module.css";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import abi from "../pages/abi/LYS.json";
+import abi from "./abi/LYS.json";
 import { useAppContext } from "../components/AppContext";
 import axios from "axios";
 
