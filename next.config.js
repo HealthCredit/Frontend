@@ -5,4 +5,5 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   reactStrictMode: true,
+  target: "serverless",
 };
