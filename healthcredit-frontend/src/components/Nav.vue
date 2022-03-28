@@ -1,10 +1,21 @@
 
-<script>
+<script setup>
 import { RouterLink } from 'vue-router';
-import { useCounterStore } from "../stores/counter"
+import { useConnection } from "../stores/counter"
 
-const store = useCounterStore();
-store.increment(2)
+// const store = useCounterStore();
+// store.counter++;
+// store.increment(2)
+
+const store = useConnection()
+
+// make calls here
+function hello(val) {
+  console.log(val)
+}
+const makeConnection = () => {
+  store.connectWallet();
+}
 </script>
 
 <template>
@@ -18,7 +29,8 @@ store.increment(2)
       <router-link to="/proposal" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Proposal</router-link>
     </div>
     <div>
-      <button @click="store.increment(1)" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Connect Wallet {{ count }}</button>
+      <button @click="makeConnection" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Connect Wallet</button>
+      <h1>{{  }}</h1>
     </div>
   </div>
 </nav>

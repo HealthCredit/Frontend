@@ -4,9 +4,6 @@ import "./index.css";
 
 import App from "./App.vue";
 import router from "./router";
-// import Chakra from '@chakra-ui/vue'
-
-// Vue.use(Chakra)
 
 const app = createApp(App);
 
