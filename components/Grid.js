@@ -4,11 +4,11 @@ import Web3Modal from "web3modal";
 import abi from "../pages/abi/LYS.json";
 import Link from "next/link";
 import styles from "./Grid.module.css";
-import { useAppContext } from "./AppContext";
+import AppContext from "./AppContext";
 import axios from "axios";
 
 function Grid({ obj, hasImpact }) {
-  const value = useContext(useAppContext);
+  const value = useContext(AppContext);
   const { accessToken } = value.state;
 
   async function approveProject(projectId) {

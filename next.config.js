@@ -4,4 +4,6 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: true,
+  target: "serverless",
 };
