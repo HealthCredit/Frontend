@@ -1,0 +1,61 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add postcss-import
+
+PATH: 
+  C:\Program Files\PowerShell\7;C:\Users\WILL\AppData\Roaming\Python\Python39\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\bin;C:\Users\WILL\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts;C:\Program Files\Git\cmd;C:\Android;C:\Program Files\dotnet\;C:\Program Files\Go\bin;C:\Program Files\PostgreSQL\13\bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\WILL\AppData\Roaming\npm;C:\Users\WILL\.local\bin;C:\Program Files\usbipd-win\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\WILL\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PowerShell\7\;C:\Program Files\GitHub CLI\;C:\Users\WILL\AppData\Roaming\Python\Python39\Scripts;C:\Program Files\Python39;C:\Users\WILL\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts;C:\Users\WILL\AppData\Local\Microsoft\WindowsApps;C:\Users\WILL\AppData\Local\GitHubDesktop\bin;C:\Users\WILL\AppData\Roaming\npm;C:\Users\WILL\go\bin;C:\Program Files\PostgreSQL\13\bin;C:\Users\WILL\AppData\Local\Yarn\bin;C:\Users\WILL\.local\bin;C:\Users\WILL\AppData\Local\Programs\IPFS Desktop\resources\app.asar.unpacked\src\ipfs-on-path\scripts\bin-win;C:\Users\WILL\AppData\Local\Programs\Hyper\resources\bin;C:\Users\WILL\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\WILL\AppData\Local\Microsoft\WindowsApps;;C:\Users\WILL\AppData\Local\Programs\oh-my-posh\bin;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  16.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\WILL\Documents\theden\Blockchain\HealthCredit1\node_modules\esbuild-windows-64\esbuild.exe'
+
+npm manifest: 
+  {
+    "cacheDirectories": [
+      ".next/cache"
+    ],
+    "name": "healthcredit",
+    "version": "1.0.0",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start -p $PORT",
+      "heroku-postbuild": "npm run build"
+    },
+    "dependencies": {
+      "@thirdweb-dev/react": "^2.0.1",
+      "@thirdweb-dev/sdk": "^2.0.13",
+      "autoprefixer": "^10.4.4",
+      "axios": "^0.26.1",
+      "bignumber.js": "^9.0.2",
+      "ethers": "^5.6.1",
+      "g": "^2.0.1",
+      "next": "^12.1.1",
+      "postcss-import": "^14.0.2",
+      "react": "17.0.2",
+      "react-dom": "17.0.2",
+      "tailwindcss": "^3.0.23",
+      "web3.storage": "^3.5.7",
+      "web3modal": "^1.9.5"
+    },
+    "devDependencies": {
+      "dotenv": "^16.0.0",
+      "eslint": "8.11.0",
+      "eslint-config-next": "12.1.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
