@@ -3,12 +3,12 @@ import Nav from "../components/Nav";
 import styles from "../styles/MintLYS.module.css";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import abi from "./abi/LYS.json";
-import { useAppContext } from "../components/AppContext";
+import abi from "../pages/abi/LYS.json";
+import AppContext from "../components/AppContext";
 import axios from "axios";
 
 function MintLYS() {
-  const value = useContext(useAppContext);
+  const value = useContext(AppContext);
   const { accessToken, currentAccount } = value.state;
   const [id, setId] = useState(0);
   const [uri, setUri] = useState("");

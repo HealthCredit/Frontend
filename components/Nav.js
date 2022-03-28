@@ -4,10 +4,10 @@ import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import axios from "axios";
-import { useAppContext } from "./AppContext";
+import AppContext from "./AppContext";
 
 const Nav = () => {
-  const value = useContext(useAppContext);
+  const value = useContext(AppContext);
   const { isConnected, currentAccount } = value.state;
 
   const connectWallet = async () => {

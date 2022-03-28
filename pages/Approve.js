@@ -4,11 +4,11 @@ import styles from "../styles/Approove.module.css";
 import Nav from "../components/Nav";
 import abi from "./abi/IMPACTabi.json";
 import { ethers } from "ethers";
-import { useAppContext } from "../components/AppContext";
+import AppContext from "../components/AppContext";
 import axios from "axios";
 
 function Approve() {
-  const value = useContext(useAppContext);
+  const value = useContext(AppContext);
   const { userHasImpact, projects, accessToken } = value.state;
 
   let ay = [];

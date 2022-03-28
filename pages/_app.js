@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { AppWrapper } from "../components/AppContext";
+import AppContext from "../components/AppContext";
 import { useState } from "react";
 // require("dotenv").config();
 
@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   const [projects, setProjects] = useState([]);
 
   return (
-    <AppWrapper.Provider
+    <AppContext.Provider
       value={{
         state: {
           isConnected,
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <Component {...pageProps} />
-    </AppWrapper.Provider>
+    </AppContext.Provider>
   );
 }
 

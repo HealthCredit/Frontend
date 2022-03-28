@@ -2,7 +2,7 @@ import styles from "../styles/Impact.module.css";
 import React, { useState } from "react";
 import Nav from "../components/Nav";
 import { ethers } from "ethers";
-import abi from "./abi/IMPACTabi.json";
+import abi from "../pages/abi/IMPACTabi.json";
 
 function Impact() {
   const [currentUser, setCurrentUser] = useState("");

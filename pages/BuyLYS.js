@@ -4,7 +4,7 @@ import styles from "../styles/BuyLYS.module.css";
 import { ethers } from "ethers";
 import abi from "./abi/LYS.json";
 
-const BuyLYS = () => {
+function BuyLYS() {
   const [id, setId] = useState(0);
   const [LYSexist, setLYSexist] = useState(0);
 
@@ -70,6 +70,6 @@ const BuyLYS = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BuyLYS;
