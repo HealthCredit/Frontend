@@ -7,6 +7,7 @@ import abi from "../pages/abi/LYS.json";
 import { Web3Storage } from "web3.storage";
 import AppContext from "../components/AppContext";
 import axios from "axios";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 function Proposal() {
   const value = useContext(AppContext);
@@ -19,6 +20,7 @@ function Proposal() {
   });
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [projectId, setProjectId] = useState(); //if form is submitted we display "you proposal is submitted"
+  const [isLoading, setIsLoading] = useState(false);
   const handleInput = (e) => {
     const name = e.target.name;
     const value = name === "LYSamount" ? +e.target.value : e.target.value;
@@ -131,7 +133,7 @@ function Proposal() {
   // submit form, save cid to database and make smart contract calls
   const submitForm = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (!formIsValid) {
       return;
     }
@@ -152,6 +154,7 @@ function Proposal() {
     // console.log(await getProposalId(cidLink));
 
     setFormIsSubmitted(true);
+    setIsLoading(false);
   };
 
   const submittedForm = async (e) => {
@@ -289,6 +292,14 @@ function Proposal() {
               </div>
             </form>
           </div>
+        )}
+        {isLoading && (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={open}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         )}
       </div>
     </>
