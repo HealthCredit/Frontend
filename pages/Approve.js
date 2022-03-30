@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import AppContext from "../components/AppContext";
 import axios from "axios";
 
+
 function Approve() {
   const value = useContext(AppContext);
   const { userHasImpact, projects, accessToken } = value.state;
@@ -28,7 +29,7 @@ function Approve() {
   // console.log(ay);
   const renderProposalForImpactHolder = () => {
     return ay.map((element, index) => {
-      return <Grid key={index} obj={element} hasImpact={true} />;
+      return <Grid key={index} obj={element} hasImpact={true} className={styles.grid}/>;
     });
   };
   const renderProposalForNonImpactHolder = () => {
