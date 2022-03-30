@@ -59,7 +59,7 @@ function BuyLYS() {
             <h4>LYS of this Id is available</h4>
             <button>
               <a
-                href={`https://testnets.opensea.io/assets/0x8c8d06991646A9701266794a385Db4b576E2678D/${id}`}
+                href={`https://testnets.opensea.io/assets/mumbai/0x8c8d06991646a9701266794a385db4b576e2678d/${id}`}
               >
                 Buy
               </a>
