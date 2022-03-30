@@ -2,7 +2,7 @@ import styles from "../styles/Impact.module.css";
 import React, { useState } from "react";
 import Nav from "../components/Nav";
 import { ethers } from "ethers";
-import abi from "../pages/abi/IMPACTabi.json";
+import abi from "../pages/abi/IMPACT.json";
 
 function Impact() {
   const [currentUser, setCurrentUser] = useState("");
@@ -14,7 +14,7 @@ function Impact() {
     let currentUserAddress = accounts[0];
     currentUserAddress = currentUserAddress.toLowerCase();
     setCurrentUser(currentUserAddress);
-    const contractAddress = "0x27717A752D65F1f05fcad8e64794b0bc5C8Bf96d";
+    const contractAddress = "0xb33570e451B6073bB7C1DdfA5dE9BCeF2f4A2269";
     const contractAbi = abi.abi;
 
     const signer = provider.getSigner();
