@@ -7,7 +7,6 @@ import { ethers } from "ethers";
 import AppContext from "../components/AppContext";
 import axios from "axios";
 
-
 function Approve() {
   const value = useContext(AppContext);
   const { userHasImpact, projects, accessToken } = value.state;
@@ -29,7 +28,14 @@ function Approve() {
   // console.log(ay);
   const renderProposalForImpactHolder = () => {
     return ay.map((element, index) => {
-      return <Grid key={index} obj={element} hasImpact={true} className={styles.grid}/>;
+      return (
+        <Grid
+          key={index}
+          obj={element}
+          hasImpact={true}
+          className={styles.grid}
+        />
+      );
     });
   };
   const renderProposalForNonImpactHolder = () => {
@@ -45,7 +51,7 @@ function Approve() {
     // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
     // console.log(currentUserAddress);
-    const contractAddress = "0xb33570e451B6073bB7C1DdfA5dE9BCeF2f4A2269";
+    const contractAddress = process.env.NEXT_PUBLIC_IMPACT_TOKEN_ADDRESS;
     const contractAbi = abi.abi;
 
     const signer = provider.getSigner();
