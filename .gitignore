@@ -4,11 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-.env
 
 # testing
 /coverage
-.env
 
 # next.js
 /.next/
@@ -35,8 +33,6 @@ yarn-error.log*
 
 # vercel
 .vercel
-.env
 
 # Local Netlify folder
 .netlify
-.env
