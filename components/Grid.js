@@ -23,7 +23,7 @@ function Grid({ obj, hasImpact }) {
     const accounts = await provider.listAccounts();
     let currentUserAddress = accounts[0];
     currentUserAddress = currentUserAddress.toLowerCase();
-    const contractAddress = "0x8c8d06991646A9701266794a385Db4b576E2678D";
+    const contractAddress = process.env.NEXT_PUBLIC_LYS_TOKEN_ADDRESS;
     const contractAbi = abi.abi;
 
     const contract = new ethers.Contract(contractAddress, contractAbi, signer);

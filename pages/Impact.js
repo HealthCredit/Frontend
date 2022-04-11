@@ -21,7 +21,7 @@ function Impact() {
     let currentUserAddress = accounts[0];
     currentUserAddress = currentUserAddress.toLowerCase();
     setCurrentUser(currentUserAddress);
-    const contractAddress = "0xb33570e451B6073bB7C1DdfA5dE9BCeF2f4A2269";
+    const contractAddress = process.env.NEXT_PUBLIC_IMPACT_TOKEN_ADDRESS;
     const contractAbi = abi;
 
     const contract = await new ethers.Contract(

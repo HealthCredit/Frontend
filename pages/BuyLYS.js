@@ -15,7 +15,7 @@ function BuyLYS() {
     // console.log(currentUserAddress);
     currentUserAddress = currentUserAddress.toLowerCase();
     // console.log(currentUserAddress);
-    const contractAddress = "0x8c8d06991646A9701266794a385Db4b576E2678D";
+    const contractAddress = process.env.NEXT_PUBLIC_LYS_TOKEN_ADDRESS;
     const contractAbi = abi.abi;
 
     const signer = provider.getSigner();
@@ -59,7 +59,7 @@ function BuyLYS() {
             <h4>LYS of this Id is available</h4>
             <button>
               <a
-                href={`https://testnets.opensea.io/assets/mumbai/0x8c8d06991646a9701266794a385db4b576e2678d/${id}`}
+                href={`https://testnets.opensea.io/assets/mumbai/${process.env.NEXT_PUBLIC_LYS_TOKEN_ADDRESS}/${id}`}
               >
                 Buy
               </a>
